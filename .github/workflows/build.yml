@@ -1,7 +1,12 @@
-name: Build Flet APK
+name: Build and Deploy Flet App
 on:
   push:
     branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -12,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11' # 安定版の3.11を推奨
+          python-version: '3.11'
 
       - name: Install Dependencies
         run: |
@@ -24,13 +29,34 @@ jobs:
         with:
           channel: 'stable'
 
+      # 1. Android APKのビルド
       - name: Build APK
-        run: |
-          flet build apk
+        run: flet build apk
 
-      # ここから下を追加！
+      # 2. Web版のビルド (base-urlを指定)
+      - name: Build Web
+        run: flet build web --base-url "/${{ github.event.repository.name }}/"
+
+      # 3. APKをアーティファクトとして保存
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: my-flet-app
+          name: flet-apk
           path: build/apk/*.apk
+
+      # 4. Web版の資材をGitHub Pages用にアップロード
+      - name: Upload Web Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
