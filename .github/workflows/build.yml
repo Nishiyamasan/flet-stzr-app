@@ -2,7 +2,9 @@ name: Build and Deploy Flet App
 on:
   push:
     branches: [ main ]
-
+  pull_request:  # ← これを追記
+      branches:
+        - main
 permissions:
   contents: read
   pages: write
