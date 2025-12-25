@@ -2,9 +2,7 @@ name: Build and Deploy Flet App
 on:
   push:
     branches: [ main ]
-  pull_request:  # ← これを追記
-      branches:
-        - main
+
 permissions:
   contents: read
   pages: write
@@ -37,7 +35,7 @@ jobs:
 
       # 2. Web版のビルド (base-urlを指定)
       - name: Build Web
-        run: flet build web --base-url "/${{ github.event.repository.name }}/"
+        run: flet build web --base-url /flet-stzr-app/
 
       # 3. APKをアーティファクトとして保存
       - name: Upload APK
@@ -50,7 +48,7 @@ jobs:
       - name: Upload Web Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build/web
+          path: build/web/
 
   deploy:
     needs: build
