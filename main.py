@@ -107,7 +107,7 @@ def main(page: ft.Page):
         ft.AppBar(
             title=ft.Text("ストゼロ・コスパ・健康くん"),
             center_title=True,
-            bgcolor=ft.colors.SURFACE_VARIANT
+            bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST
         ),
         ft.Column([
             ft.Text("🛒 比較するお酒を入力", size=18, weight="bold"),
