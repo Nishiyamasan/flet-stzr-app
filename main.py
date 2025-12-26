@@ -72,10 +72,10 @@ def main(page: ft.Page):
             
             if d1["cost"] < d2["cost"]:
                 winner = "エントリー【1】"
-                result_card.content.bgcolor = page.theme.color_scheme.primary_container
+                result_card.content.bgcolor = "primarycontainer"
             elif d2["cost"] < d1["cost"]:
                 winner = "エントリー【2】"
-                result_card.content.bgcolor = page.theme.color_scheme.secondary_container
+                result_card.content.bgcolor = "secondarycontainer"
             else:
                 winner = "引き分け"
                 result_card.content.bgcolor = None
