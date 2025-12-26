@@ -41,9 +41,9 @@ def main(page: ft.Page):
 
     def create_input_group(label_text):
         return {
-            "vol": ft.TextField(label="容量", value="350", suffix_text="ml", keyboard_type=ft.KeyboardType.NUMBER, expand=True),
-            "price": ft.TextField(label="価格", value="150", suffix_text="円", keyboard_type=ft.KeyboardType.NUMBER, expand=True),
-            "alc": ft.TextField(label="度数", value="9", suffix_text="%", keyboard_type=ft.KeyboardType.NUMBER, expand=True)
+            "vol": ft.TextField(label="容量(ml)", value="350", keyboard_type=ft.KeyboardType.NUMBER, expand=True),
+            "price": ft.TextField(label="価格(円)", value="150", keyboard_type=ft.KeyboardType.NUMBER, expand=True),
+            "alc": ft.TextField(label="度数(%)", value="9", keyboard_type=ft.KeyboardType.NUMBER, expand=True)
         }
 
     item1 = create_input_group("エントリー1")
